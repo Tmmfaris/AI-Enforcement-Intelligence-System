@@ -15,7 +15,10 @@ def show():
     df = pd.read_csv("data/clean_data.csv")
     df["date"] = pd.to_datetime(df["date"])
 
-    trend = df.groupby("date")["value"].sum().reset_index()
+    # -----------------------------
+    # Create Platform Trend
+    # -----------------------------
+    trend = df.groupby(["date", "organization"])["value"].sum().reset_index()
 
     # -----------------------------
     # Model Controls
@@ -33,22 +36,45 @@ def show():
     # -----------------------------
     # Train Isolation Forest
     # -----------------------------
-    model = IsolationForest(contamination=contamination, random_state=42)
+    model = IsolationForest(
+        contamination=contamination,
+        random_state=42
+    )
 
     trend["anomaly"] = model.fit_predict(trend[["value"]])
 
-    trend["anomaly_label"] = trend["anomaly"].map({1: "Normal", -1: "Anomaly"})
+    trend["anomaly_label"] = trend["anomaly"].map({
+        1: "Normal",
+        -1: "Anomaly"
+    })
+
+    # -----------------------------
+    # Extract anomalies
+    # -----------------------------
+    anomalies = trend[trend["anomaly"] == -1]
 
     # -----------------------------
     # KPI Summary
     # -----------------------------
     total_points = len(trend)
-    anomaly_count = len(trend[trend["anomaly"] == -1])
+    anomaly_count = len(anomalies)
 
     col1, col2 = st.columns(2)
 
     col1.metric("Total Data Points", total_points)
     col2.metric("Detected Anomalies", anomaly_count)
+
+    # -----------------------------
+    # Most anomalous platform
+    # -----------------------------
+    if not anomalies.empty:
+
+        top_platform = anomalies["organization"].value_counts().idxmax()
+
+        st.metric(
+            "Most Anomalous Platform",
+            top_platform.capitalize()
+        )
 
     st.divider()
 
@@ -62,11 +88,9 @@ def show():
         x="date",
         y="value",
         color="anomaly_label",
-        color_discrete_map={
-            "Normal": "#1f77b4",
-            "Anomaly": "#ff4b4b"
-        },
-        title="Anomaly Detection in Enforcement Activity"
+        symbol="organization",
+        hover_data=["organization", "value"],
+        title="Platform Enforcement Anomaly Detection"
     )
 
     st.plotly_chart(fig, use_container_width=True)
@@ -78,14 +102,58 @@ def show():
     # -----------------------------
     st.subheader("⚠️ Detected Anomalies")
 
-    anomalies = trend[trend["anomaly"] == -1]
-
     if not anomalies.empty:
-        st.dataframe(anomalies[["date", "value"]], use_container_width=True)
+
+        anomaly_table = anomalies[[
+            "date",
+            "organization",
+            "value"
+        ]].sort_values("date")
+
+        anomaly_table = anomaly_table.rename(columns={
+            "organization": "Platform",
+            "value": "Enforcement Value"
+        })
+
+        st.dataframe(
+            anomaly_table,
+            use_container_width=True
+        )
+
     else:
         st.info("No anomalies detected with the current model settings.")
 
     st.divider()
+
+
+    # -----------------------------
+    # Platform Anomaly Distribution
+    # -----------------------------
+    st.subheader("📊 Platform Anomaly Distribution")
+
+    if not anomalies.empty:
+
+        platform_counts = anomalies["organization"].value_counts().reset_index()
+
+        platform_counts.columns = [
+            "Platform",
+            "Anomaly Count"
+        ]
+
+        fig_platform = px.bar(
+            platform_counts,
+            x="Platform",
+            y="Anomaly Count",
+            color="Platform",
+            title="Anomalies by Platform"
+        )
+
+        st.plotly_chart(fig_platform, use_container_width=True)
+
+    else:
+        st.info("No platform anomalies detected.")
+
+
 
     # -----------------------------
     # Explanation
@@ -93,9 +161,9 @@ def show():
     st.subheader("ℹ️ How This Works")
 
     st.write("""
-Isolation Forest detects unusual patterns in data.
+Isolation Forest detects unusual patterns in enforcement activity.
 
-• Normal enforcement activity is labeled **Normal**  
+• Normal enforcement behavior is labeled **Normal**  
 • Unusual spikes or drops are labeled **Anomaly**
 
 These anomalies may indicate:

@@ -5,71 +5,89 @@ def show():
 
     st.title("🚀 AI Enforcement Intelligence System")
 
-
     st.markdown("""
+### AI-Powered Social Media Moderation Analytics Platform
 
-### AI-Powered Social Media Moderation Analytics
-
-Analyze platform enforcement trends using **Machine Learning, Forecasting, and Anomaly Detection**.
+Analyze **social media enforcement trends** using machine learning,
+anomaly detection, and forecasting techniques.
 """)
-    
+
+    st.divider()
+
+    st.header("✨ Key Features")
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.info("""
+📊 **Analytics Dashboard**
+
+Explore enforcement trends,
+platform comparisons, and topic distribution.
+""")
+
+    with col2:
+        st.info("""
+🔮 **Machine Learning Prediction**
+
+Predict future enforcement activity
+using trained ML models.
+""")
+
+    with col3:
+        st.info("""
+🚨 **Anomaly Detection**
+
+Identify unusual spikes in
+moderation activity.
+""")
+
+    col4, col5 = st.columns(2)
+
+    with col4:
+        st.info("""
+📈 **Forecasting**
+
+Predict future moderation trends
+using time-series forecasting.
+""")
+
+    with col5:
+        st.info("""
+🧠 **AI Insight Generator**
+
+Automatically generate insights
+from enforcement data.
+""")
+
+    st.divider()
+
+    st.header("🧩 System Modules")
 
     st.markdown("""
-### AI-Powered Moderation Analytics Platform
+1️⃣ **Analytics Dashboard** – Explore moderation activity  
+2️⃣ **Prediction System** – Predict enforcement values  
+3️⃣ **Anomaly Detection** – Detect unusual spikes  
+4️⃣ **Forecasting Module** – Forecast future activity  
+5️⃣ **AI Insight Generator** – Extract insights  
+6️⃣ **Report Generator** – Generate enforcement reports
+""")
 
-This system analyzes social media enforcement data and provides insights
-into content moderation trends across platforms.
+    st.divider()
 
-### Key Features
+    st.header("⚙️ Technologies Used")
 
-• 📊 **Interactive Analytics Dashboard**  
-Explore enforcement trends, platform comparisons, and topic distribution.
-
-• 🔮 **Machine Learning Prediction**  
-Predict future enforcement actions using trained ML models.
-
-• 🚨 **Anomaly Detection**  
-Identify unusual spikes in enforcement activity.
-
-• 📈 **Forecasting**  
-Predict future moderation trends using time-series forecasting.
-
-• 🧠 **AI Insight Generator**  
-Automatically generate insights from the enforcement dataset.
-
----
-
-### Technologies Used
-
-- Python
-- Streamlit
-- Scikit-learn
-- Prophet
-- Plotly
+    st.markdown("""
+- Python  
+- Streamlit  
+- Scikit-learn  
+- Prophet  
+- Plotly  
 - Pandas
-- Machine Learning
 """)
 
     st.divider()
 
-    st.subheader("Project Overview")
-
-    st.write("""
-The **AI Enforcement Intelligence System** is designed to analyze social media
-content moderation data and provide actionable insights into enforcement trends.
-
-This platform helps researchers, policymakers, and analysts understand
-how platforms moderate harmful content over time.
-""")
-
-    st.divider()
-
-    st.subheader("System Modules")
-
-    st.write("""
-1️⃣ Analytics Dashboard  
-2️⃣ Prediction System  
-3️⃣ Anomaly Detection  
-4️⃣ Forecasting  
-5️⃣ AI Insight Generator
-""")
+    st.success(
+        "Use the **Navigation menu on the left** to explore the analytics system."
+    )

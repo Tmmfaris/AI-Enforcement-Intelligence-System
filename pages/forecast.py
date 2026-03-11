@@ -15,23 +15,50 @@ def show():
     df = pd.read_csv("data/clean_data.csv")
     df["date"] = pd.to_datetime(df["date"])
 
-    trend = df.groupby("date")["value"].sum().reset_index()
+    # -----------------------------
+    # Platform Selection
+    # -----------------------------
+    st.sidebar.header("Forecast Settings")
 
+    platforms = sorted(df["organization"].unique())
+
+    selected_platform = st.sidebar.selectbox(
+        "Select Platform",
+        platforms
+    )
+
+    # Filter platform
+    platform_df = df[df["organization"] == selected_platform]
+
+    trend = platform_df.groupby("date")["value"].sum().reset_index()
+
+    # Prophet format
     trend = trend.rename(columns={
         "date": "ds",
         "value": "y"
     })
 
     # -----------------------------
-    # Forecast Settings
+    # Check minimum data
     # -----------------------------
-    st.sidebar.header("Forecast Settings")
+    if len(trend) < 2:
 
+        st.warning(
+            f"Not enough data to forecast for **{selected_platform}**.\n\n"
+            "Prophet requires at least **2 time points**."
+        )
+
+        st.dataframe(trend)
+        return
+
+    # -----------------------------
+    # Forecast Horizon
+    # -----------------------------
     months = st.sidebar.slider(
         "Forecast Horizon (months)",
-        min_value=3,
-        max_value=24,
-        value=12
+        3,
+        24,
+        12
     )
 
     # -----------------------------
@@ -45,12 +72,12 @@ def show():
 
     forecast = model.predict(future)
 
+    future_values = forecast.tail(months)
+
     # -----------------------------
     # Forecast KPIs
     # -----------------------------
-    st.subheader("📊 Forecast Summary")
-
-    future_values = forecast.tail(months)
+    st.subheader(f"📊 Forecast Summary ({selected_platform})")
 
     avg_prediction = int(future_values["yhat"].mean())
     max_prediction = int(future_values["yhat"].max())
@@ -67,13 +94,13 @@ def show():
     # -----------------------------
     # Forecast Chart
     # -----------------------------
-    st.subheader("📈 Predicted Enforcement Trend")
+    st.subheader(f"📈 Predicted Enforcement Trend ({selected_platform})")
 
     fig = px.line(
         forecast,
         x="ds",
         y="yhat",
-        title="Forecasted Enforcement Activity"
+        title=f"{selected_platform} Enforcement Forecast"
     )
 
     fig.add_scatter(
@@ -114,10 +141,9 @@ def show():
     st.subheader("ℹ️ Forecast Method")
 
     st.write("""
-The forecasting model uses **Facebook Prophet**, a time-series forecasting tool.
+The model uses **Facebook Prophet**, a time-series forecasting algorithm.
 
-The model analyzes historical enforcement trends and predicts future values.
+It learns patterns from historical enforcement data and predicts future trends.
 
-The dotted lines represent **confidence intervals**, showing the possible
-range of enforcement activity.
+The dotted lines show **confidence intervals**, indicating possible ranges of enforcement activity.
 """)
