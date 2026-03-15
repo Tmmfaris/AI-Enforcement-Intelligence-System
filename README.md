@@ -1,58 +1,160 @@
 # AI Enforcement Intelligence System
 
-AI-powered analytics platform for analyzing **social media enforcement and moderation data** using **Machine Learning, Forecasting, and AI-driven insights**.
+An **AI-powered social media moderation analytics platform** designed to analyze enforcement trends, detect anomalies, predict moderation activity, and generate automated insights from moderation datasets.
 
-This project provides an **interactive dashboard** that helps explore moderation patterns, detect anomalies, predict enforcement activity, and generate automated reports.
+The system provides an **interactive analytics dashboard** powered by Machine Learning, Anomaly Detection, and Time-Series Forecasting.
+
+This project demonstrates skills in:
+
+- Data Analytics
+- Machine Learning
+- Anomaly Detection
+- Time Series Forecasting
+- AI-powered Data Insights
+- Streamlit Dashboard Development
+- Cloud Deployment
 
 ---
 
-# Features
+# Live Demo
 
-### Analytics Dashboard
+🔗 **Live Application**
+
+https://ai-enforcement-intelligence-system-7vhnlmmt9hc8oc3hswqz36.streamlit.app/
+
+---
+
+# Problem Statement
+
+Social media platforms generate large volumes of moderation and enforcement data.  
+Analyzing these datasets manually is difficult and time-consuming.
+
+This project builds an **AI-powered analytics system** that helps:
+
+- Understand moderation trends
+- Detect abnormal moderation patterns
+- Predict future enforcement activity
+- Automatically generate insights from the dataset
+
+---
+
+# Key Features
+
+## Analytics Dashboard
 
 Interactive visualizations for:
 
-* Enforcement trends over time
-* Platform comparison
-* Topic distribution
-* Top moderated topics
+- Enforcement trends over time
+- Platform comparison
+- Topic distribution
+- Top moderated topics
 
-### Prediction System
-
-Machine learning model predicts enforcement activity based on historical data.
-
-### Anomaly Detection
-
-Detects unusual spikes or drops in enforcement activity using **Isolation Forest**.
-
-### Forecasting
-
-Predicts future enforcement trends using **Facebook Prophet time-series forecasting**.
-
-### AI Data Analyst
-
-Natural language interface allowing users to ask questions about the dataset.
-
-Example queries:
-
-* Which platform has the highest enforcement?
-* Show enforcement trend
-* What topics have the most violations?
-
-### AI Insight Generator
-
-Automatically extracts key insights from the dataset.
-
-### AI Report Generator
-
-Generates structured analytics reports summarizing enforcement patterns.
+Built using **Plotly interactive charts**.
 
 ---
 
-# Project Architecture
+## Machine Learning Prediction
+
+A regression-based ML model predicts future enforcement activity using historical moderation data.
+
+Model Used:
+
+- **Random Forest Regressor**
+
+---
+
+## Anomaly Detection
+
+Detects unusual spikes or drops in moderation activity using:
+
+- **Isolation Forest**
+
+This helps identify abnormal enforcement behavior.
+
+---
+
+## Forecasting System
+
+Predicts future moderation trends using **time-series forecasting**.
+
+Model Used:
+
+- **Facebook Prophet**
+
+Forecast visualizations allow users to analyze future moderation patterns.
+
+---
+
+## AI Data Analyst
+
+A natural language interface that allows users to query the dataset.
+
+Example queries:
+
+- Which platform has the highest enforcement?
+- Show enforcement trend
+- What topics have the most violations?
+
+---
+
+## AI Insight Generator
+
+Automatically extracts key insights from the moderation dataset such as:
+
+- Most moderated platform
+- Most common violation topics
+- Enforcement activity patterns
+
+---
+
+## AI Report Generator
+
+Generates structured reports summarizing moderation analytics including:
+
+- Platform comparison
+- Topic distribution
+- Trend analysis
+- Future predictions
+
+---
+
+# Tech Stack
+
+## Programming Language
+
+- Python
+
+## Framework
+
+- Streamlit
+
+## Data Processing
+
+- Pandas
+- NumPy
+
+## Machine Learning
+
+- Scikit-learn
+
+## Visualization
+
+- Plotly
+
+## Forecasting
+
+- Facebook Prophet
+
+## Deployment
+
+- Streamlit Cloud
+
+---
+
+# Project Structure
 
 ```
-AI_Enforcement_Intelligence_System
+AI-Enforcement-Intelligence-System
 │
 ├── app.py
 │
@@ -76,61 +178,69 @@ AI_Enforcement_Intelligence_System
 
 ---
 
-# Installation
+# Installation & Setup
 
-### Navigate to the project
+### Clone the Repository
+
+```bash
+git clone https://github.com/Tmmfaris/AI-Enforcement-Intelligence-System.git
+```
 
 ```
 cd AI-Enforcement-Intelligence-System
 ```
 
-### Install dependencies
+---
+
+### Install Dependencies
 
 ```
 pip install -r requirements.txt
 ```
 
-### Run the application
+---
+
+### Run the Application
 
 ```
 streamlit run app.py
+```
+
+Open in browser:
+
+```
+http://localhost:8501
 ```
 
 ---
 
 # Machine Learning Models
 
-* **Random Forest Regressor** – enforcement prediction
-* **Isolation Forest** – anomaly detection
-* **Prophet** – time series forecasting
+| Model | Purpose |
+|-----|-----|
+| Random Forest Regressor | Enforcement prediction |
+| Isolation Forest | Anomaly detection |
+| Prophet | Time-series forecasting |
 
 ---
 
 # Example Insights
 
-* Instagram shows the highest enforcement activity
-* Adult Nudity and Sexual Activity is the most moderated topic
-* Enforcement activity peaked in recent years
+Example analytics extracted from the dataset:
 
----
-
-# Technologies Used
-
-* Python
-* Streamlit
-* Pandas
-* Plotly
-* Scikit-learn
-* Prophet
+- Instagram shows the highest enforcement activity
+- Adult Nudity and Sexual Activity is the most moderated topic
+- Enforcement activity increased significantly in recent years
 
 ---
 
 # Future Improvements
 
-* Deploy real LLM-based AI analyst
-* Real-time moderation data pipeline
-* Advanced forecasting models
-* Interactive AI report generation
+- LLM-powered AI Data Analyst
+- Real-time moderation data pipeline
+- Advanced forecasting models
+- Automated PDF report generation
+- Real-time dashboard monitoring
 
 ---
 
@@ -138,5 +248,13 @@ streamlit run app.py
 
 **Muhammed Faris T M**
 
-Physics Postgraduate
-Data Science & Analytics Enthusiast
+Physics Postgraduate  
+Data Science & Analytics Enthusiast  
+
+🔗 LinkedIn  
+http://www.linkedin.com/in/muhammed-faris-tm-ab1233196
+
+🔗 GitHub  
+https://github.com/Tmmfaris
+
+---
