@@ -24,6 +24,25 @@ https://ai-enforcement-intelligence-system-7vhnlmmt9hc8oc3hswqz36.streamlit.app/
 
 ---
 
+# Google Colab Notebook
+
+The full **data analysis and machine learning workflow** used in this project is available in Google Colab.
+
+🔗 **Open in Colab**
+
+https://colab.research.google.com/drive/1eG1ZHdDVq_jHB-uR3hUFiQoqho-TrhZU?usp=sharing
+
+The notebook includes:
+
+- Dataset preprocessing
+- Exploratory Data Analysis (EDA)
+- Feature engineering
+- Machine learning model training
+- Anomaly detection experimentation
+- Forecasting model preparation
+
+---
+
 # Problem Statement
 
 Social media platforms generate large volumes of moderation and enforcement data.  
@@ -121,32 +140,25 @@ Generates structured reports summarizing moderation analytics including:
 # Tech Stack
 
 ## Programming Language
-
 - Python
 
 ## Framework
-
 - Streamlit
 
 ## Data Processing
-
 - Pandas
 - NumPy
 
 ## Machine Learning
-
 - Scikit-learn
 
 ## Visualization
-
 - Plotly
 
 ## Forecasting
-
 - Facebook Prophet
 
 ## Deployment
-
 - Streamlit Cloud
 
 ---
